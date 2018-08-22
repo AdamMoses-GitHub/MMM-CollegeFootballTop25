@@ -101,7 +101,15 @@ The following properties can be configured:
 				<br><b>Default value:</b> <code>[ ]</code>
 				<br>This value is <b>OPTIONAL</b>
 			</td>
-		</tr>		
+		</tr>	
+		<tr>
+			<td><code>colorRankChange</code></td>
+			<td>Boolean value, determines if the rank change column (the difference rank between this week and last week) should be colorized. If set to true will color increases in rank as green and decreases in rank as red.<br>
+				<br><b>Example:</b> <code>true</code>
+				<br><b>Default value:</b> <code>false</code>
+				<br>This value is <b>OPTIONAL</b>
+			</td>
+		</tr>
 		<tr>
 			<td><code>onScreenRefreshRate</code></td>
 			<td>Integer value, the delay between changing the on-screen displayed teams for the next set. In milliseconds. Only used when the teamsToShowAtATime value is less than 25.<br>

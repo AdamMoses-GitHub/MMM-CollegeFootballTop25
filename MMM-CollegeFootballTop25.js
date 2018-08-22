@@ -25,11 +25,11 @@ Module.register("MMM-CollegeFootballTop25", {
 		showPollWeekAndDate: true,
 		showColumnHeaders: true,
 		textClass: 'xsmall',
-		colorRankChange: 'true',
+		colorRankChange: false,
 		maxTeamNameLength: 16,
 		maxConferenceNameLength: 10,
         onScreenRefreshRate: 6000,
-		animationSpeed: 3000,
+		animationSpeed: 3000,		
 		highlightTeams: [ ]
 	},
 	// the start function
@@ -202,7 +202,9 @@ Module.register("MMM-CollegeFootballTop25", {
 					cColumn < columns.length;
 					cColumn++) {
 				var cTD = document.createElement("td");
-				cTD.align = "right";				
+				cTD.align = "right";		
+				var colorValue = this.getColorValue(rankData.team_name);
+				if (colorValue) cTD.style =  "color:" + colorValue;
 				var cHTML = '';
 				var validColumn = true;
 				// for each column value, get that date value
@@ -233,11 +235,15 @@ Module.register("MMM-CollegeFootballTop25", {
 						// &#8593; = (↑)   
 						// &#8595; = (↓)							
 						// if value is greater than zero, prepend an up arrow
-						if (changeVal > 0)
+						if (changeVal > 0) {
 							cHTML = '&#8593;' + changeVal; 
+							if (this.config.colorRankChange) cTD.style =  "color:#AA4444";
+						}
 						// if value is less than zero, prepend a down arrow
-						else if (changeVal < 0)
-							cHTML = '&#8595;' + Math.abs(changeVal);						
+						else if (changeVal < 0) {							
+							cHTML = '&#8595;' + Math.abs(changeVal);	
+							if (this.config.colorRankChange) cTD.style =  "color:#55AA55";
+						}
 						break;
 					case 'points':
 						cHTML = rankData.votes_points;
@@ -249,8 +255,6 @@ Module.register("MMM-CollegeFootballTop25", {
 				// if valid column add the TD
 				if (validColumn) {
 					cTD.innerHTML = "&nbsp;&nbsp;" + cHTML;
-					var colorValue = this.getColorValue(rankData.team_name);
-					if (colorValue) cTD.style =  "color:" + colorValue;
 					rankRow.appendChild(cTD);					
 				}			
 			}
